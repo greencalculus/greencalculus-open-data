@@ -1,6 +1,6 @@
 # GreenCalculus open factor data
 
-**What the GreenCalculus corpus covers — 17,074 emission factors from 137
+**What the GreenCalculus corpus covers — 16,673 emission factors from 137
 publishers, with each publisher's licence and whether it may be republished.**
 
 Every row is generated from the live API by [`build.py`](./build.py). Nothing is
@@ -8,11 +8,12 @@ hand-maintained: the licence filter is each publisher's own terms as recorded in
 the API response, so an upstream licence re-review changes this export on the
 next run.
 
-Data version **2026.187** (2026-09-09).
+Data version **2026.188** (2026-09-10).
 
 ## What's here
 
-**[`coverage/index.csv`](./coverage/index.csv)** — 17,074 rows. Key, name,
+**[`coverage/index.csv`](./coverage/index.csv)** — 16,673 rows, one per factor
+key. Key, name,
 section, unit, gas, GHG Protocol scope, publisher, licence, whether it's
 redistributable, and why not when it isn't.
 
@@ -51,11 +52,11 @@ document, the exact cell and whether it may be republished —
 
 ## The split
 
-Of 17,074 rows across 137 sources:
+Of 16,673 factors across 137 sources:
 
-- **15,748 rows / 75 sources** carry a licence that permits republication
+- **15,347 factors / 75 sources** carry a licence that permits republication
   (Open Government Licence, CC BY 4.0, Etalab, US public domain, Eurostat reuse…).
-- **1,326 rows / 62 sources** do not, and the reason is the publisher's own:
+- **1,326 factors / 62 sources** do not, and the reason is the publisher's own:
   paid standards (ISO, EN 15978), NonCommercial or NoDerivatives terms (PCAF,
   SBTi, WBCSD Pathfinder), share-alike that would be viral over your results
   (EXIOBASE, ecoinvent), or simply no grant found (ICAO).

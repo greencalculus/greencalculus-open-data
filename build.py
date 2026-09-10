@@ -63,7 +63,25 @@ def fetch_all():
         print(f"\r  page {pages:>3}  rows {len(rows):>6,}", end="", file=sys.stderr, flush=True)
         if not cursor or not batch:
             print(file=sys.stderr)
-            return rows, licences, meta
+            # The listing serves some keys more than once — the API reports both
+            # counts, and canonical_total is the one that means "distinct
+            # factors". Keep the first row for each key so the export counts
+            # factors rather than listing rows.
+            seen, unique = set(), []
+            for r in rows:
+                if r["key"] in seen:
+                    continue
+                seen.add(r["key"])
+                unique.append(r)
+            dropped = len(rows) - len(unique)
+            if dropped:
+                print(f"  deduped {dropped:,} repeated keys", file=sys.stderr)
+            canonical = meta.get("canonical_total")
+            if canonical is not None and len(unique) != canonical:
+                sys.exit(f"deduped to {len(unique)} but the API reports "
+                         f"canonical_total={canonical} — refusing to publish a "
+                         f"count we cannot explain")
+            return unique, licences, meta
 
 
 def main():
