@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this coverage export, please cite it as below."
+type: dataset
+title: "GreenCalculus Open Factor Coverage"
+abstract: >
+  A machine-readable map of what the GreenCalculus emission-factor corpus covers:
+  16,673 factors from 137 publishers, each row carrying its key, section, unit,
+  gas, GHG Protocol scope, publisher, licence, and whether that licence permits
+  republication — with the publisher's own stated reason recorded where it does
+  not. Values are deliberately excluded, so the export is GreenCalculus metadata
+  about coverage rather than any publisher's data, and is therefore publishable
+  regardless of upstream terms. Generated from the live API; the licence filter
+  is each publisher's own terms as recorded in the API response.
+authors:
+  - family-names: Say
+    given-names: Jeremiah
+    affiliation: "GreenCalculus"
+version: "2026.188"
+date-released: "2026-09-10"
+url: "https://greencalculus.com"
+repository-code: "https://github.com/greencalculus/greencalculus-open-data"
+license: MIT
+keywords:
+  - emission factors
+  - open data
+  - carbon accounting
+  - GHG Protocol
+  - licensing
+  - data provenance
+  - DEFRA
+  - IPCC
+  - CSRD
+  - sustainability
