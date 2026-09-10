@@ -33,7 +33,7 @@ BASE = "https://api.greencalculus.com/v1/factors"
 DENY = {
     "IEA_AI_ENERGY_2025",
 }
-UA = "greencalculus-open-data/1.0 (+https://github.com/jeremiahsay/greencalculus-sdk)"
+UA = "greencalculus-open-data/1.0 (+https://github.com/greencalculus/greencalculus-sdk)"
 OUT = Path(__file__).parent
 
 
