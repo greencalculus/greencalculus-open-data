@@ -1,9 +1,9 @@
 {
-  "data_version": "2026.187",
-  "data_updated": "2026-09-09",
+  "data_version": "2026.188",
+  "data_updated": "2026-09-10",
   "generated_from": "https://api.greencalculus.com/v1/factors (keyless)",
-  "rows_total": 17074,
-  "rows_redistributable": 15748,
+  "rows_total": 16673,
+  "rows_redistributable": 15347,
   "rows_excluded": 1326,
   "sources_total": 137,
   "sources_redistributable": 75,
