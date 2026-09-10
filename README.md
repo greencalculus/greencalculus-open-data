@@ -1,5 +1,11 @@
 # GreenCalculus open factor data
 
+[![factors](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgreencalculus%2Fgreencalculus-open-data%2Fmain%2Fmanifest.json&query=%24.rows_total&label=factors&color=04BF62)](./coverage/index.csv)
+[![republishable](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgreencalculus%2Fgreencalculus-open-data%2Fmain%2Fmanifest.json&query=%24.rows_redistributable&label=republishable&color=04BF62)](./LICENCES.md)
+[![data version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgreencalculus%2Fgreencalculus-open-data%2Fmain%2Fmanifest.json&query=%24.data_version&label=data&color=04BF62)](https://verify.greencalculus.com)
+[![no API key](https://img.shields.io/badge/API%20key-not%20needed-04BF62)](https://greencalculus.com/developers/)
+[![licence](https://img.shields.io/badge/licence-MIT-blue)](./LICENSE)
+
 **What the GreenCalculus corpus covers — 16,673 emission factors from 137
 publishers, with each publisher's licence and whether it may be republished.**
 
