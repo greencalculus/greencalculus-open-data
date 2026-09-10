@@ -67,11 +67,23 @@ Of 16,673 factors across 137 sources:
   SBTi, WBCSD Pathfinder), share-alike that would be viral over your results
   (EXIOBASE, ecoinvent), or simply no grant found (ICAO).
 
-One source is **held back by hand**: `IEA_AI_ENERGY_2025` is flagged CC BY 4.0
-upstream, which conflicts with our reading of the IEA's terms on third-party
-footprints. It stays out until that is resolved with the publisher. The
-`DENY` set in `build.py` can only ever *remove* a source, never add one, so a
-mistake there costs coverage rather than causing a licence breach.
+Two sources are **held back by hand**, for different reasons:
+
+- `IEA_AI_ENERGY_2025` is flagged CC BY 4.0 upstream, which conflicts with our
+  reading of the IEA's terms on third-party footprints. It stays out until that
+  is resolved with the publisher.
+- `LOVEHAGEN_2023_EMBODIED_USER_DEVICES` is CC BY-NC-ND 4.0, and the paper's
+  first author granted GreenCalculus written permission to display these seven
+  values and to serve them through our API. That permission runs to us; it is
+  not ours to pass on to you, so the rows are served and citable but not
+  offered for republication.
+
+The second is the general case worth knowing about: the `redistributable` flag
+answers *may GreenCalculus serve this row*, which is not always the same
+question as *may you republish this value*. Where the two diverge, the `DENY`
+map in `build.py` records the divergence and its reason. It can only ever
+*remove* a source, never add one, so a mistake there costs coverage rather than
+causing a licence breach.
 
 ## Rebuild
 

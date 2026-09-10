@@ -23,15 +23,29 @@ from pathlib import Path
 
 BASE = "https://api.greencalculus.com/v1/factors"
 
-# Human override. The API's own `redistributable` flag is the baseline; this set
-# can only ever REMOVE a source from the open export, never add one — so a wrong
-# entry here costs coverage, not a licence breach.
+# Human override, source_id -> the reason we hold it back, written for a reader
+# of the export rather than for us. The API's own `redistributable` flag is the
+# baseline; this map can only ever REMOVE a source from the open export, never
+# add one — so a wrong entry here costs coverage, not a licence breach.
 #
-#   IEA_AI_ENERGY_2025 — the corpus flags it CC BY 4.0 / redistributable, but our
-#   licence audit found the IEA prohibits third-party publication of derived
-#   footprints. Held out until that conflict is resolved with the publisher.
+# The flag answers "may GreenCalculus serve this row through its API". That is
+# not always the same question as "may a third party republish this value", and
+# where the two answers diverge the flag alone would mislabel the row. Each
+# entry below is one such divergence, and each carries its own reason because
+# they are not the same kind of hold.
 DENY = {
-    "IEA_AI_ENERGY_2025",
+    # The corpus flags it CC BY 4.0 / redistributable, but our licence audit
+    # found the IEA prohibits third-party publication of derived footprints.
+    # Held out until that conflict is resolved with the publisher.
+    "IEA_AI_ENERGY_2025":
+        "held — licence conflict under review",
+
+    # The paper is CC BY-NC-ND 4.0. The first author granted GreenCalculus
+    # written permission (2026-09-10) to display these values and to serve them
+    # through our API. That grant runs to us and is not ours to pass on, so the
+    # rows are served but not offered for republication.
+    "LOVEHAGEN_2023_EMBODIED_USER_DEVICES":
+        "author grant covers the GreenCalculus API only — not sublicensable",
 }
 UA = "greencalculus-open-data/1.0 (+https://github.com/greencalculus/greencalculus-sdk)"
 OUT = Path(__file__).parent
@@ -122,8 +136,7 @@ def main():
                         f.get("unit"), f.get("gas"), (r.get("scope") or {}).get("ghg_protocol"),
                         s.get("id"), L.get("publisher"), L.get("name"),
                         "yes" if publishable(r) else "no",
-                        "" if publishable(r) else ("held: licence conflict under review"
-                                                   if s.get("id") in DENY else "publisher terms"),
+                        "" if publishable(r) else DENY.get(s.get("id"), "publisher terms"),
                         r.get("updated")])
 
     # ---------- licences ----------
@@ -141,15 +154,16 @@ def main():
             continue
         lines.append(f"| {n:,} | `{sid}` | {L.get('publisher','')} | {L.get('name','')} | {L.get('attribution','')} |")
     lines += ["\n## Excluded — not redistributable\n",
-              "These are served by the API (you may look them up and cite them) but their",
-              "upstream terms do not allow us to republish the values in bulk. The reason is",
-              "the publisher's, recorded verbatim.\n",
+              "These are served by the API (you may look them up and cite them) but they",
+              "are not offered for bulk republication. Most reasons below are the",
+              "publisher's own terms, recorded verbatim; the ones in **bold** are ours,",
+              "where a licence we hold does not extend to you.\n",
               "| Rows | Source | Licence | Why excluded |", "|---:|---|---|---|"]
     for sid, n in counts.most_common():
         L = licences.get(sid) or {}
         if L.get("redistributable") is True and sid not in DENY:
             continue
-        why = ("**held — licence conflict under review**" if sid in DENY else L.get('basis', '—'))
+        why = (f"**{DENY[sid]}**" if sid in DENY else L.get('basis', '—'))
         lines.append(f"| {n:,} | `{sid}` | {L.get('name','—')} | {why} |")
     (OUT / "LICENCES.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 

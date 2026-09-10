@@ -1,6 +1,6 @@
 # Sources and licences
 
-Data version **2026.188** (2026-09-10) · 16,673 factors from 137 sources.
+Data version **2026.189** (2026-09-10) · 16,673 factors from 137 sources.
 
 Attribution is a condition of nearly every licence below. If you use the open
 export, reproduce the attribution line for each source you actually use.
@@ -87,9 +87,10 @@ export, reproduce the attribution line for each source you actually use.
 
 ## Excluded — not redistributable
 
-These are served by the API (you may look them up and cite them) but their
-upstream terms do not allow us to republish the values in bulk. The reason is
-the publisher's, recorded verbatim.
+These are served by the API (you may look them up and cite them) but they
+are not offered for bulk republication. Most reasons below are the
+publisher's own terms, recorded verbatim; the ones in **bold** are ours,
+where a licence we hold does not extend to you.
 
 | Rows | Source | Licence | Why excluded |
 |---:|---|---|---|
@@ -122,7 +123,7 @@ the publisher's, recorded verbatim.
 | 7 | `CCRI_POS_METHODS_2024` | CCRI proprietary — methodology white paper available for fair use citation; describes the 5-step bottom-up methodology (hardware selection → single-node measurement → network electricity → tx efficiency analysis → carbon emissions estimation) underlying CCRI 2022a-d industry reports and CCRI 2025 indices | proprietary or paid licence — cited under fair use, not redistributable |
 | 7 | `CCRI_ETH_2022` | CCRI proprietary — fair use citation of published methodology + numerical results from the ConsenSys-commissioned Merge report PDF; measurements covered 95.54% of all post-Merge Ethereum clients | proprietary or paid licence — cited under fair use, not redistributable |
 | 7 | `IEA_AI_ENERGY_2025` | CC BY 4.0 | **held — licence conflict under review** |
-| 7 | `LOVEHAGEN_2023_EMBODIED_USER_DEVICES` | CC BY-NC-ND 4.0 (Elsevier Open Access) | CC BY-NC-ND 4.0 — NonCommercial AND NoDerivatives; not redistributable through a paid feed. On-site display is separately permitted by a written grant from the paper's first author (2026-09-09), so these rows serve on public pages but stay out of the /v1/corpus feed |
+| 7 | `LOVEHAGEN_2023_EMBODIED_USER_DEVICES` | CC BY-NC-ND 4.0 (Elsevier Open Access) | **author grant covers the GreenCalculus API only — not sublicensable** |
 | 7 | `ISO_14044_2006` | Paid licence (ISO); cited as framework reference only — clause numbers reproduced under fair-use | proprietary or paid licence — cited under fair use, not redistributable |
 | 6 | `SPECPOWER_SSJ2008` | SPEC fair-use citation; full results free for non-commercial reference | non-commercial licence — not redistributable by a paid product |
 | 6 | `IEA_STREAMING_FOOTPRINT_2020` | IEA — (c) OECD/IEA; citation with attribution | reviewed; upstream terms do not permit redistribution |

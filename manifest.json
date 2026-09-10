@@ -1,5 +1,5 @@
 {
-  "data_version": "2026.188",
+  "data_version": "2026.189",
   "data_updated": "2026-09-10",
   "generated_from": "https://api.greencalculus.com/v1/factors (keyless)",
   "rows_total": 16673,
@@ -8,7 +8,8 @@
   "sources_total": 137,
   "sources_redistributable": 75,
   "held_by_override": [
-    "IEA_AI_ENERGY_2025"
+    "IEA_AI_ENERGY_2025",
+    "LOVEHAGEN_2023_EMBODIED_USER_DEVICES"
   ],
   "values_included": false
 }
