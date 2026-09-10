@@ -1,0 +1,67 @@
+name: Release
+
+# Self-healing tagging: manifest.json's data_version is the release.
+#
+# build.py stamps the data version it read from the API. When that changes and
+# lands on main, this cuts the matching GitHub Release. When it hasn't, the run
+# is a no-op — so this is safe on every push, and the weekly run picks up
+# anything a failed run missed.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "manifest.json"
+      - "coverage/**"
+      - ".github/workflows/release.yml"
+  schedule:
+    - cron: "44 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    name: Tag the data version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # create the GitHub Release
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read the data version
+        id: v
+        run: |
+          V=$(python3 -c "import json;print(json.load(open('manifest.json'))['data_version'])")
+          R=$(python3 -c "import json;m=json.load(open('manifest.json'));print(m['rows_total'], m['rows_redistributable'], m['sources_total'])")
+          if [ -z "$V" ]; then echo "::error::manifest.json has no data_version"; exit 1; fi
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          set -- $R
+          echo "rows=$1"    >> "$GITHUB_OUTPUT"
+          echo "open=$2"    >> "$GITHUB_OUTPUT"
+          echo "sources=$3" >> "$GITHUB_OUTPUT"
+
+      - name: Cut the release if it is missing
+        env:
+          GH_TOKEN: ${{ github.token }}
+          V: ${{ steps.v.outputs.version }}
+        run: |
+          if gh release view "$V" >/dev/null 2>&1; then
+            echo "Release $V already exists — nothing to do." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          gh release create "$V" \
+            --target "$GITHUB_SHA" \
+            --title "Data version $V" \
+            --notes "${{ steps.v.outputs.rows }} factors from ${{ steps.v.outputs.sources }} publishers; ${{ steps.v.outputs.open }} carry a licence that permits republication.
+
+          Counts come from \`manifest.json\`, which \`build.py\` writes from the live API — see [\`coverage/index.csv\`](./coverage/index.csv) and [\`LICENCES.md\`](./LICENCES.md)." \
+            --generate-notes
+          echo "Cut release **$V**." >> "$GITHUB_STEP_SUMMARY"
